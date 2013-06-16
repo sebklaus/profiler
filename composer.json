@@ -1,0 +1,25 @@
+{
+    "name": "juy/profiler",
+    "description": "A profiler for Laravel 4.",
+    "keywords": ["laravel","profiler"],
+    "homepage": "http://github.com/juy/profiler",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sevdin Filiz",
+            "email": "angelside@users.sourceforge.net",
+            "homepage": "http://juysoft.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x"
+    },
+    "autoload": {
+        "psr-0": {
+            "Juy\\Profiler": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
