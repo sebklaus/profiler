@@ -1,7 +1,7 @@
 {
     "name": "juy/profiler",
     "description": "A profiler for Laravel 4.",
-    "keywords": ["laravel","profiler"],
+    "keywords": ["laravel","profiler", "debug bar", "anbu"],
     "homepage": "http://github.com/juy/profiler",
     "license": "MIT",
     "authors": [
