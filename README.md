@@ -2,6 +2,8 @@
 
 A PHP 5.3 profiler for Laravel 4. Backend based on sorora/omni, fronted based on loic-sharma/profiler, some features inspirated from papajoker/profiler.
 
+[![](http://i.imm.io/19tLC.png)](http://i.imm.io/19tLC.png "Click for big picture")
+
 ## Features
 
 - Environment info
