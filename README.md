@@ -14,10 +14,10 @@ A PHP 5.3 profiler for Laravel 4. Backend based on sorora/omni, fronted based on
 - Total execution time
     - Custom "checkpoints", see [this section](#custom-timers)
 - Total memory usage
-- Includes files
+- Includes files (I think not realy need this)
 - All variables passed to views
 - Session variables
-- Laravel auth variables
+- Laravel auth variables (Need test)
 - Sentry auth veriables
 
 
