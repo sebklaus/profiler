@@ -58,7 +58,7 @@
 	
 
 	<ul id="anbu-open-tabs" class="anbu-tabs">
-		<li><a data-anbu-tab="anbu-environment" class="anbu-tab" href="#">Environment <span class="anbu-count">{{ App::environment() }}</span></a></li>
+		<li><a data-anbu-tab="anbu-environment" class="anbu-tab" href="#" title="Environment">Env <span class="anbu-count">{{ App::environment() }}</span></a></li>
 		<li><a data-anbu-tab="anbu-controller" class="anbu-tab" href="#">Controller <span class="anbu-count">{{ Route::currentRouteAction() }}</span></a></li>
 		<li><a data-anbu-tab="anbu-routes" class="anbu-tab" href="#">Routes <span class="anbu-count">{{ count(Route::getRoutes()) }}</span></a></li>
 		<li><a data-anbu-tab="anbu-log" class="anbu-tab" href="#">Log <span class="anbu-count">{{ count($app_logs) }}</span></a></li>
@@ -89,4 +89,5 @@
 @if(Config::get('profiler::jquery') ) 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 @endif
+
 <script><?php echo file_get_contents($assetPath.'profiler.min.js'); ?></script>
