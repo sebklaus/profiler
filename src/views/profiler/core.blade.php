@@ -47,7 +47,7 @@
 				</div>
 			@endif
 
-			@if (Sentry::check())
+			@if (class_exists('Cartalyst\Sentry\SentryServiceProvider') AND Sentry::check())
 				<div class="anbu-tab-pane anbu-table anbu-auth-sentry">
 					@include('profiler::profiler._auth_sentry')
 				</div>
@@ -71,7 +71,7 @@
 		@if (Auth::check())
 			<li><a class="anbu-tab" data-anbu-tab="anbu-auth">Auth</a></li>
 		@endif
-		@if (Sentry::check())
+		@if (class_exists('Cartalyst\Sentry\SentryServiceProvider') AND Sentry::check())
 			<li><a class="anbu-tab" data-anbu-tab="anbu-auth-sentry">Auth <span class="anbu-count">{{ Sentry::getUser()->email }}</span></a></li>
 		@endif
 
