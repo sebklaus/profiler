@@ -48,7 +48,7 @@
 	display:inline-block;
 	text-decoration:none !important;
 	font-size:0.8em !important;
-	padding: 0.8em 1em 0.7em 1em !important;
+	padding: 0.8em 0.8em 0.7em 0.8em !important;
 	-webkit-transition-property:color, background-color;
 	-webkit-transition-duration: 0.7s, 0.2s;
 	-webkit-transition-timing-function: ease-in, ease-in;
@@ -210,5 +210,16 @@ span.anbu-count {
 /* hide panel-open elements, will become visible through anbu.start() */
 #anbu-close, #anbu-zoom, .anbu-tab-pane {
 	visibility: hidden;
+}
+
+
+/***** Override the setting when the toolbar is on the top *****/
+
+
+/***** Media query *****/
+@media screen and (max-width: 980px) {
+	a[data-anbu-tab~="anbu-controller"] .anbu-count {
+		display: none !important;
+	}
 }
 
