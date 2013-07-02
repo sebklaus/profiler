@@ -22,13 +22,22 @@ A PHP 5.3 profiler for Laravel 4. Backend based on sorora/omni, fronted based on
 
 
 ## Installation
-To add Profiler to your Laravel application, add the following to your `composer.json` file:
+To add Profiler to your Laravel application follow this three steps:
+
+Add the following to your `composer.json` file:
+
 
     "juy/profiler" : "dev-master"
 
-Then run `composer update` or `composer install` if you have not already installed packages. One final step is needed, add the below to the `providers` array in `app/config/app.php` configuration file:
+Then run `composer update` or `composer install` if you have not already installed packages.
+
+Add below to the `providers` array in `app/config/app.php` configuration file:
 
     'Juy\Profiler\Providers\ProfilerServiceProvider',
+
+Add below to the `aliases` array in `app/config/app.php` configuration file:
+
+    'Profiler'		=> 'Juy\Profiler\Facades\Profiler',
 
 ## Configuration
 
