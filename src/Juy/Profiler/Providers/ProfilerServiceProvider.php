@@ -119,20 +119,23 @@ class ProfilerServiceProvider extends ServiceProvider {
 	{
 		$this->app['router']->after(function ($request, $response) {
 
-			$content = $response->getContent();
-			$output = \Profiler::outputData();
-
-			$body_position = strripos($content, '</body>');
-			if($body_position !== false)
-			{
-				$content = substr($content, 0, $body_position) . $output . substr($content, $body_position);
+			// Do not display profiler on non-HTML responses.
+			if(\Str::startsWith($response->headers->get('Content-Type'), 'text/html')){
+				$content = $response->getContent();
+				$output = \Profiler::outputData();
+	
+				$body_position = strripos($content, '</body>');
+				if($body_position !== false)
+				{
+					$content = substr($content, 0, $body_position) . $output . substr($content, $body_position);
+				}
+				else
+				{
+					$content .= $output;
+				}
+	
+				$response->setContent($content);
 			}
-			else
-			{
-				$content .= $output;
-			}
-
-			$response->setContent($content);
 		});
 	}
 
