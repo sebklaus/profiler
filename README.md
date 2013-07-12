@@ -47,23 +47,23 @@ You will want to run the following command to publish the config to your applica
 
 ### Profiler
 
-Set this option to *false* to disable the profiler. It is `true` by default.
+Set this option to `FALSE` to disable the profiler. It is `NULL` by default and it is dependent debug option on `config/app.php`.
 
-    // Config.php
-    'profiler' => true
+    // config.php
+    'profiler' => NULL
 
 If you wish to disable the profiler during your application, just do:
 
-    Config::set('profiler::profiler', false);
+    Config::set('profiler::profiler', FALSE);
 
 >**Note::** This will only disable the output, it will still do it's background listening but will not output it to the browser.
 
 ### jQuery
 
-Set this option to `false` to not pull in jQuery from within the profiler. This is useful if you already have jQuery present on your page requests. Set to `true` by default.
+Set this option to `FALSE` to not pull in jQuery from within the profiler. This is useful if you already have jQuery present on your page requests. Set to `TRUE` by default.
 
     // config.php
-    'jquery' => true
+    'jquery' => TRUE
 
 ## Usage
 
