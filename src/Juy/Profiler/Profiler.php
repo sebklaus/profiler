@@ -83,10 +83,12 @@ class Profiler {
             ksort($this->view_data);
 
             $this->time->totalTime();
-            
-            try{
+
+			// Catch PDO error when no connection is set
+            try {
                 $sqlLog = array_reverse(\DB::getQueryLog());
-            }catch(\PDOException $e){
+            }
+			catch(\PDOException $e){
                 $sqlLog = array();
             }
 

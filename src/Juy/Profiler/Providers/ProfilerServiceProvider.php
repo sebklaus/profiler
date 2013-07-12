@@ -93,12 +93,12 @@ class ProfilerServiceProvider extends ServiceProvider {
 	 */
 	protected function activateProfiler()
 	{
-		
-		// If the profiler config is null, get value from app.debug
-		if(is_null($this->app['config']->get('profiler::profiler'))){
-            		$this->app['config']->set('profiler::profiler', $this->app['config']->get('app.debug'));
-        	}
-        
+		// If the profiler config is NULL, get value from app.debug
+		if (is_null($this->app['config']->get('profiler::profiler')))
+		{
+			$this->app['config']->set('profiler::profiler', $this->app['config']->get('app.debug'));
+		}
+
 		// Check console isn't running and profiler is enabled
 		$this->profiler = (!$this->app->runningInConsole() and !$this->app['request']->ajax()) ? $this->app['config']->get('profiler::profiler') : false;
 
@@ -117,15 +117,16 @@ class ProfilerServiceProvider extends ServiceProvider {
 	 */
 	protected function afterListener()
 	{
-		$this->app['router']->after(function ($request, $response) {
-
+		$this->app['router']->after(function ($request, $response)
+		{
 			// Do not display profiler on non-HTML responses.
-			if(\Str::startsWith($response->headers->get('Content-Type'), 'text/html')){
+			if (\Str::startsWith($response->headers->get('Content-Type'), 'text/html'))
+			{
 				$content = $response->getContent();
 				$output = \Profiler::outputData();
-	
 				$body_position = strripos($content, '</body>');
-				if($body_position !== false)
+
+				if ($body_position !== FALSE)
 				{
 					$content = substr($content, 0, $body_position) . $output . substr($content, $body_position);
 				}
