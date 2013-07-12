@@ -141,11 +141,12 @@ class Profiler {
 	protected function formatBytes($bytes)
 	{
 		$measures = array('B', 'KB', 'MB', 'DB');
-		$bytes = memory_get_usage();
+
 		for($i = 0; $bytes >= 1024; $i++)
 		{
 			$bytes = $bytes/1024;
 		}
+
 		return number_format($bytes,($i ? 2 : 0),'.', ',').$measures[$i];
 	}
 
