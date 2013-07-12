@@ -83,11 +83,17 @@ class Profiler {
             ksort($this->view_data);
 
             $this->time->totalTime();
+            
+            try{
+                $sqlLog = array_reverse(\DB::getQueryLog());
+            }catch(\PDOException $e){
+                $sqlLog = array();
+            }
 
             $data = array(
                 'times'		=> $this->time->getTimes(),
                 'view_data'	=> $this->view_data,
-                'sql_log'	=> array_reverse(\DB::getQueryLog()),
+                'sql_log'	=> $sqlLog,
                 'app_logs'	=> $this->logs,
                 'includedFiles'	=> get_included_files(),
 
