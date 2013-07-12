@@ -93,6 +93,12 @@ class ProfilerServiceProvider extends ServiceProvider {
 	 */
 	protected function activateProfiler()
 	{
+		
+		// If the profiler config is null, get value from app.debug
+		if(is_null($this->app['config']->get('profiler::profiler'))){
+            		$this->app['config']->set('profiler::profiler', $this->app['config']->get('app.debug'));
+        	}
+        
 		// Check console isn't running and profiler is enabled
 		$this->profiler = (!$this->app->runningInConsole() and !$this->app['request']->ajax()) ? $this->app['config']->get('profiler::profiler') : false;
 
