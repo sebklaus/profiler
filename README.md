@@ -58,13 +58,6 @@ If you wish to disable the profiler during your application, just do:
 
 >**Note::** This will only disable the output, it will still do it's background listening but will not output it to the browser.
 
-### jQuery
-
-Set this option to `FALSE` to not pull in jQuery from within the profiler. This is useful if you already have jQuery present on your page requests. Set to `TRUE` by default.
-
-    // config.php
-    'jquery' => TRUE
-
 ## Usage
 
 ### Custom Timers

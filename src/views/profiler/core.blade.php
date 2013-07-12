@@ -84,9 +84,5 @@
 	</ul>
 </div>
 
-
-@if(Config::get('profiler::jquery') ) 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-@endif
-
+<script type="text/javascript">window.jQuery || document.write('<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"><\/script>')</script>
 <script><?php echo file_get_contents($assetPath.'profiler.min.js'); ?></script>
