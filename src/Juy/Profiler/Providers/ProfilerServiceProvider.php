@@ -9,9 +9,9 @@ class ProfilerServiceProvider extends ServiceProvider {
 	 *
 	 * @var bool
 	 */
-	protected $defer = false;
+	protected $defer = FALSE;
 
-	protected $profiler = true;
+	protected $profiler = TRUE;
 
 	/**
 	 * Bootstrap the application events.
@@ -147,7 +147,7 @@ class ProfilerServiceProvider extends ServiceProvider {
 	 */
 	protected function listenViewComposing()
 	{
-		$this->app['events']->listen('composing:*', function ($data)
+		$this->app['events']->listen('composing:*', function($data)
 		{
 			\Profiler::setViewData($data->getData());
 		});
@@ -160,7 +160,7 @@ class ProfilerServiceProvider extends ServiceProvider {
 	 */
 	protected function listenLogs()
 	{
-		$this->app['events']->listen('illuminate.log', function ($type, $message)
+		$this->app['events']->listen('illuminate.log', function($type, $message)
 		{
 			\Profiler::addLog($type, $message);
 		});
