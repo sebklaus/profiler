@@ -83,7 +83,7 @@ class Time {
 	 */
 	protected function getStartTime()
 	{
-		if (defined(LARAVEL_START))
+		if (defined('LARAVEL_START'))
 		{
 			return LARAVEL_START;
 		}
