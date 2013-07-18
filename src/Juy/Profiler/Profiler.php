@@ -8,7 +8,7 @@ class Profiler {
 	protected $view_data = array();
 	protected $logs = array();
 	protected $includedFiles = array();
-	protected $enabled = true;
+	protected $enabled = TRUE;
 
 	public function __construct(Time $time)
 	{
@@ -183,12 +183,13 @@ class Profiler {
 	}
 
 	/**
-     * Enable the profiler
-     *
-     * @param bool $on
-     * @return void
-     */
-	public function enable($on = true){
+	 * Enable the profiler
+	 *
+	 * @param bool $on
+	 * @return void
+	 */
+	public function enable($on = TRUE)
+	{
 		$this->enabled = $on;
 	}
 
@@ -197,8 +198,9 @@ class Profiler {
 	 *
 	 * @return void
 	 */
-	public function disable(){
-		$this->enable(false);
+	public function disable()
+	{
+		$this->enable(FALSE);
 	}
 
 	/**
@@ -206,7 +208,8 @@ class Profiler {
 	 *
 	 * @return bool
 	 */
-	public function isEnabled(){
-		return \Config::get('profiler::profiler') && $this->enabled == true;
+	public function isEnabled()
+	{
+		return \Config::get('profiler::profiler') && $this->enabled == TRUE;
 	}
 }
