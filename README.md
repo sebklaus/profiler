@@ -58,6 +58,10 @@ If you wish to disable the profiler during your application, just do:
 
     Config::set('profiler::profiler', FALSE);
 
+or
+    
+    Profiler::disable();
+
 >**Note::** This will only disable the output, it will still do it's background listening but will not output it to the browser.
 
 ## Usage
