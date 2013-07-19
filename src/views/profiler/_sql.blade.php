@@ -1,13 +1,4 @@
 @if(!empty($sql_log))
-
-	<style type="text/css"><?php echo file_get_contents($assetPath.'prettify.min.css'); ?></style>
-	<script><?php echo file_get_contents($assetPath.'prettify.js'); ?></script>
-	<script>
-		$(function(){
-			prettyPrint();
-		});
-	</script>
-
 	<table>
 		<tr>
 			<th>No.</th>
