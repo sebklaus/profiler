@@ -5,7 +5,7 @@ A profiler for Laravel 4. Backend based on sorora/omni, fronted based on loic-sh
 - [Profiler on Packagist](https://packagist.org/packages/juy/profiler)
 - [Profiler on GitHub](https://github.com/juy/profiler)
 
-[![](http://i.imm.io/19tLC.png)](http://i.imm.io/19tLC.png "Click for big picture")
+[![](https://dl.dropboxusercontent.com/u/76869590/laravel-package/juy-profiler.png)](https://dl.dropboxusercontent.com/u/76869590/laravel-package/juy-profiler.png "Click for big picture")
 
 ## Features
 
