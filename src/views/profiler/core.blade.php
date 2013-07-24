@@ -1,4 +1,4 @@
-<style type="text/css">
+<style>
 	<?php echo file_get_contents($assetPath.'profiler.min.css'); ?>
 	@if(!empty($sql_log))
 		<?php echo file_get_contents($assetPath.'prettify.min.css'); ?>
