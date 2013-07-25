@@ -100,6 +100,10 @@ class Profiler {
 				'assetPath' => __DIR__.'/../../assets/',
 			);
 
+			// Reset alternative blade tags
+			\Blade::setEscapedContentTags('{{', '}}');
+			\Blade::setContentTags('{{{', '}}}');
+
 			return \View::make('profiler::profiler.core', $data);
 		}
 	}
