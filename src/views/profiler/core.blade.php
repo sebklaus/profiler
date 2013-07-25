@@ -63,7 +63,7 @@
 
 	<ul id="anbu-open-tabs" class="anbu-tabs">
 		<li><a data-anbu-tab="anbu-environment" class="anbu-tab" href="#">Env <span class="anbu-count">{{ App::environment() }}</span></a></li>
-		<li><a data-anbu-tab="anbu-controller" class="anbu-tab" href="#">Controller <span class="anbu-count">{{ Route::currentRouteAction() }}</span></a></li>
+		<li><a data-anbu-tab="anbu-controller" class="anbu-tab" href="#">Controller <span class="anbu-count">{{ (Route::currentRouteAction()) ? Route::currentRouteAction() : 'NULL' }}</span></a></li>
 		<li><a data-anbu-tab="anbu-routes" class="anbu-tab" href="#">Routes <span class="anbu-count">{{ count(Route::getRoutes()) }}</span></a></li>
 		<li><a data-anbu-tab="anbu-log" class="anbu-tab" href="#">Log <span class="anbu-count">{{ count($app_logs) }}</span></a></li>
 		<li><a data-anbu-tab="anbu-sql" class="anbu-tab" href="#">SQL <span class="anbu-count">{{ count($sql_log) }}</span></a></li>
