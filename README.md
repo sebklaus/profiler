@@ -33,11 +33,11 @@ Add the following to your `composer.json` file:
 
 Then run `composer update` or `composer install` if you have not already installed packages.
 
-Add below to the `providers` array in `app/config/app.php` configuration file:
+Add below to the `providers` array in `app/config/app.php` configuration file (add the end):
 
     'Juy\Profiler\Providers\ProfilerServiceProvider',
 
-Add below to the `aliases` array in `app/config/app.php` configuration file:
+Add below to the `aliases` array in `app/config/app.php` configuration file (add the end):
 
     'Profiler'		=> 'Juy\Profiler\Facades\Profiler',
 
