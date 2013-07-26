@@ -1,4 +1,4 @@
-@if (Auth::check())
+@if (Auth::check() && Auth::user() instanceof \Illuminate\Database\Eloquent\Model)
 	<table>
 		<tr>
 			<th>Key</th>
