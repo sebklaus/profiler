@@ -1,6 +1,7 @@
 <?php namespace Juy\Profiler\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Juy\Profiler\Facades\Profiler;
 
 class ProfilerServiceProvider extends ServiceProvider {
 
@@ -123,7 +124,7 @@ class ProfilerServiceProvider extends ServiceProvider {
 			if (\Str::startsWith($response->headers->get('Content-Type'), 'text/html'))
 			{
 				$content = $response->getContent();
-				$output = \Profiler::outputData();
+				$output = Profiler::outputData();
 				$body_position = strripos($content, '</body>');
 
 				if ($body_position !== FALSE)
@@ -134,7 +135,7 @@ class ProfilerServiceProvider extends ServiceProvider {
 				{
 					$content .= $output;
 				}
-	
+
 				$response->setContent($content);
 			}
 		});
@@ -149,7 +150,7 @@ class ProfilerServiceProvider extends ServiceProvider {
 	{
 		$this->app['events']->listen('composing:*', function($data)
 		{
-			\Profiler::setViewData($data->getData());
+			Profiler::setViewData($data->getData());
 		});
 	}
 
@@ -162,7 +163,7 @@ class ProfilerServiceProvider extends ServiceProvider {
 	{
 		$this->app['events']->listen('illuminate.log', function($type, $message)
 		{
-			\Profiler::addLog($type, $message);
+			Profiler::addLog($type, $message);
 		});
 	}
 
