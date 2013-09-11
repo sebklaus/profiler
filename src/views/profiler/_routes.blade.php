@@ -1,15 +1,28 @@
 <table>
     <tr>
-        <th>Routes</th>
+        <th></th>
+        <th>Path</th>
+        <th>Route</th>
+        <th>Uses</th>
+        <th>Before</th>
+        <th>After</th>
     </tr>
-	<?php $routes = Route::getRoutes(); ?>
+    <?php $routes = Route::getRoutes(); ?>
     @foreach($routes as $name => $route)
-		<tr>
+        <tr>
+            <td>[{{ array_get($route->getMethods(), 0) }}]</td>
+            <td>{{ $route->getPath() }}</td>
+
             @if ( Route::currentRouteName() == $name)
-			    <td><strong>{{ $name }}</strong></td>
+                <td><strong>{{ $name }}</strong></td>
             @else
                 <td>{{ $name }}</td>
             @endif
-		</tr>
+
+            <td>{{ $route->getAction() ?: 'Closure' }}</td>
+
+            <td>{{ implode('|', $route->getBeforeFilters()) }}</td>
+            <td>{{ implode('|', $route->getAfterFilters()) }}</td>
+        </tr>
     @endforeach
 </table>
