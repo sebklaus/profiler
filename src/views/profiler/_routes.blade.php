@@ -9,18 +9,15 @@
     </tr>
     <?php $routes = Route::getRoutes(); ?>
     @foreach($routes as $name => $route)
+        @if ( Route::currentRouteName() == $name)
+        <tr class="highlight">
+        @else
         <tr>
+        @endif
             <td>[{{ array_get($route->getMethods(), 0) }}]</td>
             <td>{{ $route->getPath() }}</td>
-
-            @if ( Route::currentRouteName() == $name)
-                <td><strong>{{ $name }}</strong></td>
-            @else
-                <td>{{ $name }}</td>
-            @endif
-
+            <td>{{ $name }}</td>
             <td>{{ $route->getAction() ?: 'Closure' }}</td>
-
             <td>{{ implode('|', $route->getBeforeFilters()) }}</td>
             <td>{{ implode('|', $route->getAfterFilters()) }}</td>
         </tr>

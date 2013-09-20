@@ -159,6 +159,10 @@
 	vertical-align:top !important;
 }
 
+.anbu-table .highlight {
+	font-weight: bold;
+}
+
 .anbu-table-first {
 	background-color:#eee !important;
 	border-right:1px solid #ccc !important;
