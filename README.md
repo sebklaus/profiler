@@ -1,3 +1,8 @@
+# Abandoned
+This project is **abandoned at 23 September 2013**. Developers who want to be free to continue on own fork.
+
+
+
 # Profiler
 
 A profiler for Laravel 4. Backend based on sorora/omni, frontend based on loic-sharma/profiler, some features inspired by papajoker/profiler, some features original by myself.
