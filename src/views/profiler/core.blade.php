@@ -46,6 +46,18 @@
 				@include('profiler::profiler._session')
 			</div>
 
+			@if (\Config::get('profiler::btns.config'))
+			<div class="anbu-tab-pane anbu-table anbu-config">
+				@include('profiler::profiler._config')
+			</div>
+			@endif
+
+			@if (Config::get('profiler::btns.storage'))
+			<div class="anbu-tab-pane anbu-table anbu-storage">
+				@include('profiler::profiler._storage_logs')
+			</div>
+			@endif
+
 			@if (Auth::check())
 				<div class="anbu-tab-pane anbu-table anbu-auth">
 					@include('profiler::profiler._auth')
@@ -62,22 +74,35 @@
 	</div>
 
 	<ul id="anbu-open-tabs" class="anbu-tabs" style="<?php if (Config::get('profiler::minimized') == true) { echo "display: none;"; } ?>">
-		<li><a data-anbu-tab="anbu-environment" class="anbu-tab" href="#">Env <span class="anbu-count">{{ App::environment() }}</span></a></li>
-		<li><a data-anbu-tab="anbu-controller" class="anbu-tab" href="#">Controller <span class="anbu-count">{{ (Route::currentRouteAction()) ? Route::currentRouteAction() : 'NULL' }}</span></a></li>
-		<li><a data-anbu-tab="anbu-routes" class="anbu-tab" href="#">Routes <span class="anbu-count">{{ count(Route::getRoutes()) }}</span></a></li>
-		<li><a data-anbu-tab="anbu-log" class="anbu-tab" href="#">Log <span class="anbu-count">{{ count($app_logs) }}</span></a></li>
-		<li><a data-anbu-tab="anbu-sql" class="anbu-tab" href="#">SQL <span class="anbu-count">{{ count($sql_log) }}</span></a></li>
-		<li><a class="anbu-tab" data-anbu-tab="anbu-checkpoints">Time <span class="anbu-count">{{ round($times['total'], 3) }} s</span></a></li>
-		<li><a class="anbu-tab">Memory <span class="anbu-count">{{ Profiler::getMemoryUsage() }}</span></a></li>
-		<li><a class="anbu-tab" data-anbu-tab="anbu-file">Files <span class="anbu-count">{{ count($includedFiles) }}</span></a></li>
-		<li><a class="anbu-tab" data-anbu-tab="anbu-view">View <span class="anbu-count">{{ count($view_data) }}</span></a></li>
-		<li><a class="anbu-tab" data-anbu-tab="anbu-session">Session <span class="anbu-count">{{ count(Session::all()) }}</span></a></li>
-		@if (Auth::check())
-			<li><a class="anbu-tab" data-anbu-tab="anbu-auth">Auth</a></li>
-		@endif
-		@if (class_exists('Cartalyst\Sentry\SentryServiceProvider') AND Sentry::check())
-			<li><a class="anbu-tab" data-anbu-tab="anbu-auth-sentry">Auth <span class="anbu-count">{{ Sentry::getUser()->email }}</span></a></li>
-		@endif
+	@if (Config::get('profiler::doc'))
+		<a href="{{ Config::get('profiler::doc') }}" class="doc" target="doc">&nbsp;</a>
+	@endif
+	<?php
+		$btns = Config::get('profiler::btns');
+		foreach ($btns as $key => $btn) {
+			$count = '';
+			if (($key == 'auth') && (!Auth::check())) continue;
+			if (($key == 'auth-sentry') && !(class_exists('Cartalyst\Sentry\SentryServiceProvider') AND Sentry::check())) continue;
+			try {
+				switch ($key) {
+					case 'log' : $count = $counts[$key]($app_logs); break;
+					case 'sql' : $count = $counts[$key]($sql_log); break;
+					case 'checkpoints' : $count= $counts[$key]($times); break;
+					case 'file' : $count = $counts[$key]($includedFiles); break;
+					case 'view' : $count = $counts[$key]($view_data); break;
+					case 'storage' : $count = $counts[$key]($storageLogs); break;
+					case 'config' : $count = $counts[$key]($config); break;
+					default : $count = $counts[$key]();
+				}
+			} catch (Exception $e) {
+			$count = '';
+		}
+		echo  '<li><a data-anbu-tab="anbu-'.$key.'" class="anbu-tab" href="#"
+			title="'.((isset($btn['title']))?$btn['title']:$btn['label']).'">'.$btn['label'].
+			' <span class="anbu-count">'.$count.'</span></a>'.
+			'</li>';
+		}
+	?>
 
 		<li class="anbu-tab-right"><a id="anbu-hide" href="#">&#8614;</a></li>
 		<li class="anbu-tab-right"><a id="anbu-close" href="#">&times;</a></li>

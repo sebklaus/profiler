@@ -82,7 +82,7 @@ anbu.jq.extend(anbu, {
 			event.preventDefault();
 		});
 		anbu.el.tab.click(function(event) {
-			anbu.clicked_tab(anbu.jq(this));
+			anbu.clicked_tab(anbu.jq(this), 400);
 			event.preventDefault();
 		});
 
@@ -92,13 +92,13 @@ anbu.jq.extend(anbu, {
 	// -------------------------------------------------------------
 	// A tab has been clicked, decide what to do.
 
-	clicked_tab: function(tab) {
+	clicked_tab: function(tab, height) {
 
 		// if the tab is closed
 		if (anbu.window_open && anbu.active_pane == tab.attr(anbu.tab_data)) {
-			anbu.close_window();
+			anbu.close_window(height);
 		} else {
-			anbu.open_window(tab);
+			anbu.open_window(tab, height);
 		}
 
 	},
@@ -107,14 +107,14 @@ anbu.jq.extend(anbu, {
 	// -------------------------------------------------------------
 	// Animate open the top window to the appropriate tab.
 
-	open_window: function(tab) {
+	open_window: function(tab, height) {
 
 		// can't directly assign this line, but it works
 		anbu.jq('.anbu-tab-pane:visible').fadeOut(200);
 		anbu.jq('.' + tab.attr(anbu.tab_data)).delay(220).fadeIn(300);
 		anbu.el.tab_links.removeClass(anbu.active_tab);
 		tab.addClass(anbu.active_tab);
-		anbu.el.window.slideDown(300);
+		anbu.el.window.slideDown(height);
 		anbu.el.close.fadeIn(300);
 		anbu.el.zoom.fadeIn(300);
 		anbu.active_pane = tab.attr(anbu.tab_data);
@@ -126,10 +126,10 @@ anbu.jq.extend(anbu, {
 	// -------------------------------------------------------------
 	// Animate closed the top window hiding all tabs.
 
-	close_window: function() {
+	close_window: function(height) {
 
 		anbu.el.tab_pane.fadeOut(100);
-		anbu.el.window.slideUp(300);
+		anbu.el.window.slideUp(height);
 		anbu.el.close.fadeOut(300);
 		anbu.el.zoom.fadeOut(300);
 		anbu.el.tab_links.removeClass(anbu.active_tab);

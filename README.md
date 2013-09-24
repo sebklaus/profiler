@@ -1,16 +1,12 @@
-# Abandoned
-This project is **abandoned at 23 September 2013**. Developers who want to be free to continue on own fork.
-
-
+# Continued
+This is the continuation of [juy/profiler](https://github.com/juy/profiler).  
+It includes Pull Requests [#34](https://github.com/juy/profiler/pull/34) &amp; [#6](https://github.com/juy/profiler/pull/6).
 
 # Profiler
 
-A profiler for Laravel 4. Backend based on sorora/omni, frontend based on loic-sharma/profiler, some features inspired by papajoker/profiler, some features original by myself.
+A PHP 5.3 profiler for Laravel 4. Backend based on sorora/omni, fronted based on loic-sharma/profiler, some features inspirated from papajoker/profiler, some feature original by myself.
 
-- [Profiler on Packagist](https://packagist.org/packages/juy/profiler)
-- [Profiler on GitHub](https://github.com/juy/profiler)
-
-[![](https://dl.dropboxusercontent.com/u/76869590/laravel-package/juy-profiler.png)](https://dl.dropboxusercontent.com/u/76869590/laravel-package/juy-profiler.png "Click for big picture")
+[![](http://i.imm.io/19tLC.png)](http://i.imm.io/19tLC.png "Click for big picture")
 
 ## Features
 
@@ -18,68 +14,74 @@ A profiler for Laravel 4. Backend based on sorora/omni, frontend based on loic-s
 - Current controller/action info
 - Routes
 - Log events
-- SQL query log with syntax highlighting
+- SQL Query Log with syntax highlighting
 - Total execution time
     - Custom "checkpoints", see [this section](#custom-timers)
 - Total memory usage
-- Includes files (I don't think this is really needed)
+- Includes files (I think not realy need this)
 - All variables passed to views
 - Session variables
-- Laravel auth variables (Need to test)
-- Sentry auth variables
+- Laravel auth variables (Need test)
+- Sentry auth veriables
 
 
 ## Installation
-To add Profiler to your Laravel application, follow these three steps:
+To add Profiler to your Laravel application, add the following to your `composer.json` file:
 
-Add the following to your `composer.json` file:
+    "juy/profiler" : "dev-master"
 
-```json
-"juy/profiler" : "dev-master"
-```
+Then run `composer update` or `composer install` if you have not already installed packages. One final step is needed, add the below to the `providers` array in `app/config/app.php` configuration file:
 
-Then, run `composer update` or `composer install` if you have not already installed packages.
-
-Add the below line to the `providers` array in `app/config/app.php` configuration file (add at the end):
-
-```php
-'Juy\Profiler\Providers\ProfilerServiceProvider',
-```
-
-Add the below line to the `aliases` array in `app/config/app.php` configuration file (add at the end):
-
-```php
-'Profiler' => 'Juy\Profiler\Facades\Profiler',
-```
+    'Juy\Profiler\Providers\ProfilerServiceProvider',
 
 ## Configuration
 
-You will want to run the following command to publish the config to your application, otherwise it will be overwritten when the package is updated.
+You will want to run the following command to publish the config to your application, otherwise it will be overwritten in updates.
 
-```shell
-php artisan config:publish juy/profiler
-```
+    php artisan config:publish juy/profiler
 
 ### Profiler
 
-Set this option to `FALSE` to disable the profiler. By default, it is `NULL`, which makes the profiler refer to the app debug option in `config/app.php`.
+Set this option to *false* to disable the profiler. It is `true` by default.
 
-```php
-// config.php
-'profiler' => NULL
-```
+    // Config.php
+    'profiler' => true
 
 If you wish to disable the profiler during your application, just do:
 
-```php
-Config::set('profiler::profiler', FALSE);
+    Config::set('profiler::profiler', false);
+    
+you can order,disable and set label and title
 
-// or
+    'btns' => array(
+            'environment'=> array('label'=>'','title'=>'Environment'),
+            'memory'=>      array('label'=>'','title'=>'Memory'),
+            'controller'=>  array('label'=>'CTRL','title'=>'Controller'),
+            'routes'=>      array('label'=>'ROUTE'),
+            'log'=>         array('label'=>'LOG'),
+            'sql'=>         array('label'=>'SQL'),
+            'checkpoints'=> array('label'=>'TIME'),
+            'file'=>        array('label'=>'FILES'),
+            'view'=>        array('label'=>'VIEW'),
+            'session'=>     array('label'=>'SESSION'),
+            //'config'=>      array('label'=>'CONFIG'),
+            'storage'=>      array('label'=>'LOGS','title'=>'Logs in storage'),
+            'auth'=>        array('label'=>'AUTH'),
+            'auth-sentry'=> array('label'=>'AUTH')
+        ),
+        
+Add a link on your favorite doc
 
-Profiler::disable();
-```
+    'doc'=>'http://laravel.com/docs'
 
 >**Note::** This will only disable the output, it will still do it's background listening but will not output it to the browser.
+
+### jQuery
+
+Set this option to `false` to not pull in jQuery from within the profiler. This is useful if you already have jQuery present on your page requests. Set to `true` by default.
+
+    // config.php
+    'jquery' => true
 
 ## Usage
 
@@ -87,29 +89,23 @@ Profiler::disable();
 
 To start a timer, all you need to do is:
     
-```php
-Profiler::start('my timer key');
-```
+    Profiler::start('my timer key');
 
 To end the timer, simply call the end function like so:
 
-```php
-Profiler::end('my timer key');
-```
+    Profiler::end('my timer key');
 
 ## Logging
 
-Profiler utilizes Laravel's built in logging system and captures logged events. To log events, you can do (as you would with Laravel) any of these:
+Profiler utilizes Laravels built in logging system and captures logged events. To log events, you can do (as you would with laravel) any of these:
 
-```php
-Log::debug('Your message here');
-Log::info('Your message here');
-Log::notice('Your message here');
-Log::warning('Your message here');
-Log::error('Your message here');
-Log::critical('Your message here');
-Log::alert('Your message here');
-Log::emergency('Your message here');
-```
+    Log::debug('Your message here');
+    Log::info('Your message here');
+    Log::notice('Your message here');
+    Log::warning('Your message here');
+    Log::error('Your message here');
+    Log::critical('Your message here');
+    Log::alert('Your message here');
+    Log::emergency('Your message here');
 
-These are color-coded in the Logs part of the profiler – colors may change in future to more accurately reflect the log type.
+These are colour coded in the Logs part of the profiler - colours may change in future to more accurately reflect the log type.
