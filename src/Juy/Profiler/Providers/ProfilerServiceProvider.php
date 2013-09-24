@@ -5,8 +5,6 @@ use Juy\Profiler\Facades\Profiler;
 
 class ProfilerServiceProvider extends ServiceProvider {
 
-	const SESSION_HASH = '_profiler';
-
 	/**
 	 * Indicates if loading of the provider is deferred.
 	 *
@@ -38,7 +36,6 @@ class ProfilerServiceProvider extends ServiceProvider {
 		$this->loadConfig();
 		$this->registerViews();
 		$this->activateProfiler();
-		$this->registerProfilerRouting();
 	}
 
 	/**
@@ -91,28 +88,6 @@ class ProfilerServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Register routes to enable or disable the profiler.
-	 *
-	 * @return void
-	 */
-	public function registerProfilerRouting()
-	{
-		$provider = $this;
-
-		$this->app->booting(function($app) use ($provider)
-		{
-			// Toggle profiler
-			$app['router']->get('/_profiler/toggle', function() use ($app, $provider)
-			{
-				$state = $app['session']->get($provider::SESSION_HASH) ? false : true;
-				$app['session']->put($provider::SESSION_HASH, $state);
-
-				return $app['redirect']->to($app['url']->previous());
-			});
-		});
-	}
-
-	/**
 	 * Activates the profiler
 	 *
 	 * @return void
@@ -123,17 +98,6 @@ class ProfilerServiceProvider extends ServiceProvider {
 		if (is_null($this->app['config']->get('profiler::profiler')))
 		{
 			$this->app['config']->set('profiler::profiler', $this->app['config']->get('app.debug'));
-		}
-
-		// Check for session toggle
-		if ($this->app['config']->get('profiler::profiler'))
-		{
-			$session = $this->app['session'];
-			$profiler = $this->app['profiler'];
-			if ($session->has(static::SESSION_HASH))
-			{
-				$this->app['config']->set('profiler::profiler', $session->get(static::SESSION_HASH));
-			}
 		}
 
 		// Check console isn't running and profiler is enabled
