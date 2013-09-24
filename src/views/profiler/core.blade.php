@@ -5,7 +5,7 @@
 	@endif
 </style>
 
-<div class="anbu">
+<div class="anbu <?php if (Config::get('profiler::minimized') == true) { echo "anbu-hidden";} ?>" style="<?php if (Config::get('profiler::minimized') == true) { echo "width: 2.6em; overflow:hidden;"; } ?>">
 
 	<div class="anbu-window">
 		<div class="anbu-content-area">
@@ -61,7 +61,7 @@
 		</div>
 	</div>
 
-	<ul id="anbu-open-tabs" class="anbu-tabs">
+	<ul id="anbu-open-tabs" class="anbu-tabs" style="<?php if (Config::get('profiler::minimized') == true) { echo "display: none;"; } ?>">
 		<li><a data-anbu-tab="anbu-environment" class="anbu-tab" href="#">Env <span class="anbu-count">{{ App::environment() }}</span></a></li>
 		<li><a data-anbu-tab="anbu-controller" class="anbu-tab" href="#">Controller <span class="anbu-count">{{ (Route::currentRouteAction()) ? Route::currentRouteAction() : 'NULL' }}</span></a></li>
 		<li><a data-anbu-tab="anbu-routes" class="anbu-tab" href="#">Routes <span class="anbu-count">{{ count(Route::getRoutes()) }}</span></a></li>
@@ -84,7 +84,7 @@
 		<li class="anbu-tab-right"><a id="anbu-zoom" href="#">&#8645;</a></li>
 	</ul>
 
-	<ul id="anbu-closed-tabs" class="anbu-tabs">
+	<ul id="anbu-closed-tabs" class="anbu-tabs" style="<?php if (Config::get('profiler::minimized') == true) { echo "display: block;"; } ?>">
 		<li><a id="anbu-show" href="#">&#8612;</a></li>
 	</ul>
 </div>
