@@ -1,4 +1,4 @@
-<?php namespace Juy\Profiler\Facades;
+<?php namespace Sebklaus\Profiler\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

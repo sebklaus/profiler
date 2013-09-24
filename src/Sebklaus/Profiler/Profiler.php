@@ -1,6 +1,6 @@
-<?php namespace Juy\Profiler;
+<?php namespace Sebklaus\Profiler;
 
-use Juy\Profiler\Loggers\Time;
+use Sebklaus\Profiler\Loggers\Time;
 
 class Profiler {
 

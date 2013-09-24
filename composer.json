@@ -1,14 +1,20 @@
 {
-    "name": "juy/profiler",
-    "description": "A profiler for Laravel 4.",
-    "keywords": ["laravel","profiler", "debug bar", "anbu"],
-    "homepage": "http://github.com/juy/profiler",
+    "name": "sebklaus/profiler",
+    "description": "A profiler for Laravel 4. Forked from juy/profiler.",
+    "keywords": ["laravel","profiler", "debug bar", "anbu", "juy"],
+    "homepage": "http://github.com/sebklaus/profiler",
     "license": "MIT",
     "authors": [
         {
-            "name": "Sevdin Filiz",
+            "name": "Sevdin Filiz - Original Author",
             "email": "angelside@users.sourceforge.net",
             "homepage": "http://juysoft.com",
+            "role": "Developer"
+        }
+        {
+            "name": "Sebastian Klaus",
+            "email": "sebastian@klaus.com.au",
+            "homepage": "http://sebastian.klaus.com.au",
             "role": "Developer"
         }
     ],
@@ -18,7 +24,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Juy\\Profiler": "src/"
+            "Sebklaus\\Profiler": "src/"
         }
     },
     "minimum-stability": "dev"

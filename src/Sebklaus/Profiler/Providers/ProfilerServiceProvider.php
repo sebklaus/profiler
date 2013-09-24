@@ -1,7 +1,7 @@
-<?php namespace Juy\Profiler\Providers;
+<?php namespace Sebklaus\Profiler\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Juy\Profiler\Facades\Profiler;
+use Sebklaus\Profiler\Facades\Profiler;
 
 class ProfilerServiceProvider extends ServiceProvider {
 
