@@ -21,7 +21,7 @@ class ProfilerServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('juy/profiler');
+		$this->package('sebklaus/profiler');
 	}
 
 	/**
@@ -47,8 +47,8 @@ class ProfilerServiceProvider extends ServiceProvider {
 	{
 		$this->app['profiler'] = $this->app->share(function($app)
 		{
-			return new \Juy\Profiler\Profiler(
-				new \Juy\Profiler\Loggers\Time
+			return new \Sebklaus\Profiler\Profiler(
+				new \Sebklaus\Profiler\Loggers\Time
 			);
 		});
 	}
@@ -63,7 +63,7 @@ class ProfilerServiceProvider extends ServiceProvider {
 		$this->app->booting(function()
 		{
 			$loader = \Illuminate\Foundation\AliasLoader::getInstance();
-			$loader->alias('Profiler', 'Juy\Profiler\Facades\Profiler');
+			$loader->alias('Profiler', 'Sebklaus\Profiler\Facades\Profiler');
 		});
 	}
 
@@ -74,7 +74,7 @@ class ProfilerServiceProvider extends ServiceProvider {
 	 */
 	protected function loadConfig()
 	{
-		$this->app['config']->package('juy/profiler', __DIR__.'/../../../config');
+		$this->app['config']->package('sebklaus/profiler', __DIR__.'/../../../config');
 	}
 
 	/**
