@@ -11,10 +11,14 @@
 		<td>Environment</td>
 		<td>{{ App::environment() }}</td>
 	</tr>
-    <tr>
-        <td>PHP</td>
-        <td>{{ phpversion() }}</td>
-    </tr>
+	<tr>
+		<td>PHP</td>
+		<td>{{ phpversion() }}</td>
+	</tr>
+	<tr>
+		<td>Loaded modules</td>
+		<td>{{ implode(", ", get_loaded_extensions()) }}</td>
+	</tr>
 	<tr>
 		<td>Timezone</td>
 		<td>{{ Config::get('app.timezone') }}</td>
