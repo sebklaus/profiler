@@ -22,6 +22,8 @@ class ProfilerServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('sebklaus/profiler');
+		
+		include __DIR__ . '/../../routes.php';
 	}
 
 	/**
@@ -98,6 +100,15 @@ class ProfilerServiceProvider extends ServiceProvider {
 		if (is_null($this->app['config']->get('profiler::profiler')))
 		{
 			$this->app['config']->set('profiler::profiler', $this->app['config']->get('app.debug'));
+		}
+
+		// Check urlToggle config option
+		if ($this->app['config']->get('profiler::urlToggle'))
+		{
+			if ($this->app['session']->has('_profiler'))
+			{
+				$this->app['config']->set('profiler::profiler', $this->app['session']->get('_profiler'));
+			}
 		}
 
 		// Check console isn't running and profiler is enabled

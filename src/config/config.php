@@ -5,6 +5,9 @@ return array(
 	// Set to TRUE to enable profiling, FALSE to disable. NULL to listen to the app.debug value (default)
 	'profiler' => NULL,
 	
+	// Set to TRUE to activate URL based Profiler enabling/ disabling (add /_profiler to any url to activate the toggle mechanism)
+	'urlToggle' => TRUE,
+
 	// Profiler can hide certain footer elements and be annoying. This makes it minimized by default. Set TRUE to enable.
 	'minimized' => FALSE,
 
@@ -26,5 +29,5 @@ return array(
 		'auth-sentry'=> array('label'=>'AUTH')
 	),
 	'doc' => 'http://www.laravel.com/docs/',
-
+	
 );
