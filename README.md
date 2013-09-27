@@ -54,6 +54,11 @@ The default `NULL` uses the `debug` setting of `app/config/app.php` (or the appr
     // config.php
     'profiler' => NULL,
 
+To be able to activate Profiler via URL (/_profiler), set the `urlToggle` option to `TRUE`:
+
+	// config.php
+	'urlToggle' => FALSE,
+
 If you wish to disable the profiler during runtime, add the below code to your script:
 
     Config::set('profiler::profiler', false);
