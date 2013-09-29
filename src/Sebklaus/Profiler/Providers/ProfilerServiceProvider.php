@@ -22,8 +22,8 @@ class ProfilerServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('sebklaus/profiler');
-		
 		include __DIR__ . '/../../routes.php';
+		$this->activateProfiler();
 	}
 
 	/**
@@ -37,7 +37,6 @@ class ProfilerServiceProvider extends ServiceProvider {
 		$this->registerAlias();
 		$this->loadConfig();
 		$this->registerViews();
-		$this->activateProfiler();
 	}
 
 	/**
