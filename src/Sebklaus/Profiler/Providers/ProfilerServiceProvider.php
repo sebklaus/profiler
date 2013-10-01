@@ -22,7 +22,9 @@ class ProfilerServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('sebklaus/profiler');
+		// Include package routes
 		include __DIR__ . '/../../routes.php';
+		// activate profiler
 		$this->activateProfiler();
 	}
 
@@ -104,6 +106,7 @@ class ProfilerServiceProvider extends ServiceProvider {
 		// Check urlToggle config option
 		if ($this->app['config']->get('profiler::urlToggle'))
 		{
+		    // activate profiler, if '_profiler' key is found in current session
 			if ($this->app['session']->has('_profiler'))
 			{
 				$this->app['config']->set('profiler::profiler', $this->app['session']->get('_profiler'));

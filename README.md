@@ -26,6 +26,7 @@ Backend based on sorora/omni, frontend based on loic-sharma/profiler. Some featu
 - Laravel webserver error logs
 - Laravel auth variables (if used)
 - Sentry auth variables (if used)
+- Enabling/ Disabling via URL (add **/_profiler** to root URL (eg. *http://localhost/_profiler*))
 
 ## Installation
 To add Profiler to your Laravel application, add the below line to your `composer.json` file, either in `"require": { … }` or `"require-dev": { … }`:
@@ -54,7 +55,7 @@ The default `NULL` uses the `debug` setting of `app/config/app.php` (or the appr
     // config.php
     'profiler' => NULL,
 
-To be able to activate Profiler via URL (/_profiler), set the `urlToggle` option to `TRUE`:
+To be able to activate Profiler via URL (add **/_profiler** to root URL (eg. *http://localhost/_profiler*)), set the `urlToggle` option to `TRUE`:
 
 	// config.php
 	'urlToggle' => FALSE,
