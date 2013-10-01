@@ -60,6 +60,9 @@ To be able to activate Profiler via URL (add **/_profiler** to root URL (eg. *ht
 	// config.php
 	'urlToggle' => FALSE,
 
+> If you had Profiler installed prior to **v1.6.0**, and published the config settings, please add the above element to the array in `/app/config/packages/sebklaus/profiler/config.php` or run `php artisan config:publish` again.  
+> Running `php artisan config:publish` will replace the config file, so make sure you restore your desired settings.
+
 If you wish to disable the profiler during runtime, add the below code to your script:
 
     Config::set('profiler::profiler', false);
