@@ -10,6 +10,8 @@
 				<td>
 					@if (is_array($value))
 						<pre>{{ print_r($value, true) }}</pre>
+					@elseif (is_object($value) && !method_exists($value, '__toString'))
+						{{ get_class($value) }}
 					@else
 						{{ $value }}
 					@endif
