@@ -86,12 +86,21 @@ class Profiler {
 			$data = array(
 				'times' => 			$this->time->getTimes(),
 				'view_data' =>		$this->view_data,
-				'sql_log' =>		array_reverse(\DB::getQueryLog()),
 				'app_logs' =>		$this->logs,
 				'includedFiles' =>	get_included_files(),
 				'counts' =>			$this->getCounts(),
-				'assetPath' =>		__DIR__.'/../../assets/',
+				'assetPath' =>		__DIR__.'/../../../public/',
 			);
+			// Check if SQL connection can be established
+			try
+			{
+				$data['sql_log'] = array_reverse(\DB::getQueryLog());
+			}
+			// Catch exception and return empty array
+			catch (\PDOException $exception)
+			{
+				$data['sql_log'] = array();
+			}
 			// Check if btns.storage config option is set
 			if (\Config::get('profiler::btns.storage'))
 			{
@@ -108,7 +117,7 @@ class Profiler {
 			return \View::make('profiler::profiler.core', $data);
 		}
 	}
-	
+
 	/**
 	 * return all scripts for btn count
 	 *
@@ -119,7 +128,7 @@ class Profiler {
 		return array(
 			'environment' =>	function(){ return \App::environment(); },
 			'memory' =>			function(){ return Profiler::getMemoryUsage(); },
-			'controller' =>		function(){ return \Route::currentRouteAction(); },
+			'controller' =>		function(){ return $controller = \Route::currentRouteAction() != "" ? \Route::currentRouteAction() : "N/A"; },
 			'routes' =>			function(){ return count(\Route::getRoutes()); },
 			'log' =>			function($app_logs){ return count($app_logs); },
 			'sql' =>			function($sql_log){ return count($sql_log); },

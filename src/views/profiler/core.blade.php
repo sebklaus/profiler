@@ -1,7 +1,7 @@
 <style>
-	<?php echo file_get_contents($assetPath.'profiler.min.css'); ?>
+	<?php echo file_get_contents($assetPath.'css/profiler.min.css'); ?>
 	@if(!empty($sql_log))
-		<?php echo file_get_contents($assetPath.'prettify.min.css'); ?>
+		<?php echo file_get_contents($assetPath.'css/prettify.min.css'); ?>
 	@endif
 </style>
 
@@ -138,10 +138,10 @@
 </div>
 
 <script type="text/javascript">window.jQuery || document.write('<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"><\/script>')</script>
-<script><?php echo file_get_contents($assetPath.'profiler.min.js'); ?></script>
+<script><?php echo file_get_contents($assetPath.'js/profiler.min.js'); ?></script>
 
 @if(!empty($sql_log))
-	<script><?php echo file_get_contents($assetPath.'prettify.min.js'); ?></script>
+	<script><?php echo file_get_contents($assetPath.'js/prettify.min.js'); ?></script>
 	<script>
 	$(function(){
 		prettyPrint();
