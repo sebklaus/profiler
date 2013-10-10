@@ -232,7 +232,7 @@ class Profiler {
 	 */
 	public static function getMemoryUsage()
 	{
-		return $this->formatBytes(memory_get_usage());
+		return Profiler::formatBytes(memory_get_usage());
 	}
 
 	/**
