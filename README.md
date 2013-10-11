@@ -26,10 +26,10 @@ Backend based on sorora/omni, frontend based on loic-sharma/profiler. Some featu
 - Laravel webserver error logs
 - Laravel auth variables (if used)
 - Sentry auth variables (if used)
-- Enabling/ Disabling via URL (add **/_profiler** to root URL (eg. *http://localhost/_profiler*))
+- Enabling/ Disabling via URL (add **/_profiler** to the end of any URL (eg. *http://localhost/folder/_profiler*))
 
 ## Installation
-To add Profiler to your Laravel application, add the below line to your `composer.json` file, either in `"require": { … }` or `"require-dev": { … }`:
+To add Profiler to your Laravel application, add the below line to your `composer.json` file, in `"require": { … }`:
 
     "sebklaus/profiler" : "dev-master"
 
@@ -55,10 +55,12 @@ The default `NULL` uses the `debug` setting of `app/config/app.php` (or the appr
     // config.php
     'profiler' => NULL,
 
-To be able to activate Profiler via URL (add **/_profiler** to root URL (eg. *http://localhost/_profiler*)), set the `urlToggle` option to `TRUE`:
+To be able to activate Profiler via URL (add **/_profiler** to the end of any URL (eg. *http://localhost/folder/_profiler*)), set the `urlToggle` option to `TRUE`:
 
 	// config.php
 	'urlToggle' => FALSE,
+
+You will be redirected back to the page you started the request from (eg. *http://localhost/folder*).
 
 > If you had Profiler installed prior to **v1.6.0**, and published the config settings, please add the above element to the array in `/app/config/packages/sebklaus/profiler/config.php` or run `php artisan config:publish` again.  
 > Running `php artisan config:publish` will replace the config file, so make sure you restore your desired settings.
