@@ -230,9 +230,9 @@ class Profiler {
 	 *
 	 * @return string
 	 */
-	public function getMemoryUsage()
+	public static function getMemoryUsage()
 	{
-		return $this->formatBytes(memory_get_usage());
+		return Profiler::formatBytes(memory_get_usage());
 	}
 
 	/**
@@ -241,10 +241,9 @@ class Profiler {
 	 * @param sting $bytes
 	 * @return string
 	 */
-	protected function formatBytes($bytes)
+	protected static function formatBytes($bytes)
 	{
 		$measures = array('B', 'KB', 'MB', 'GB');
-		$bytes = memory_get_usage();
 		for($i = 0; $bytes >= 1024; $i++)
 		{
 			$bytes = $bytes/1024;
