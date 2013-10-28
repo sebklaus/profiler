@@ -1,7 +1,7 @@
 <style>
-	<?php echo file_get_contents($assetPath.'css/profiler.min.css'); ?>
+	{{ file_get_contents($assetPath.'css/profiler.min.css') }}
 	@if(!empty($sql_log))
-		<?php echo file_get_contents($assetPath.'css/prettify.min.css'); ?>
+		{{ file_get_contents($assetPath.'css/prettify.min.css') }}
 	@endif
 </style>
 
