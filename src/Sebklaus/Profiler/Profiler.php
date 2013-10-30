@@ -128,7 +128,7 @@ class Profiler {
 		return array(
 			'environment' =>	function(){ return \App::environment(); },
 			'memory' =>			function(){ return Profiler::getMemoryUsage(); },
-			'controller' =>		function(){ return $controller = \Route::currentRouteAction() != "" ? \Route::currentRouteAction() : "N/A"; },
+			'controller' =>		function(){ return $controller = \Route::current()->getActionName() != "" ? \Route::current()->getActionName() : "N/A"; },
 			'routes' =>			function(){ return count(\Route::getRoutes()); },
 			'log' =>			function($app_logs){ return count($app_logs); },
 			'sql' =>			function($sql_log){ return count($sql_log); },
