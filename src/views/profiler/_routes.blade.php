@@ -18,8 +18,8 @@
             <td>{{ $route->uri() }}</td>
             <td>{{ $name }}</td>
             <td>{{ $route->getActionName() ?: 'Closure' }}</td>
-            <td>{{ implode('|', array_keys($route->getBeforeFilters())) }}</td>
-            <td>{{ implode('|', array_keys($route->getAfterFilters())) }}</td>
+            <td>{{ implode('|', array_keys($route->beforeFilters())) }}</td>
+            <td>{{ implode('|', array_keys($route->afterFilters())) }}</td>
         </tr>
     @endforeach
 </table>
