@@ -128,7 +128,19 @@ class Profiler {
 		return array(
 			'environment' =>	function(){ return \App::environment(); },
 			'memory' =>			function(){ return Profiler::getMemoryUsage(); },
-			'controller' =>		function(){ return $controller = \Route::current()->getActionName() != "" ? \Route::current()->getActionName() : "N/A"; },
+			// Check for Laravel Version
+			'controller' =>		function()
+								{
+									global $app;
+									if (strpos($app::VERSION, '4.1') !== FALSE)
+									{
+										return $controller = \Route::current()->getActionName() != "" ? \Route::current()->getActionName() : "N/A"; 
+									}
+									elseif (strpos($app::VERSION, '4.0') !== FALSE)
+									{
+										return $controller = \Route::currentRouteAction() != "" ? \Route::currentRouteAction() : "N/A";
+									}
+								},
 			'routes' =>			function(){ return count(\Route::getRoutes()); },
 			'log' =>			function($app_logs){ return count($app_logs); },
 			'sql' =>			function($sql_log){ return count($sql_log); },
