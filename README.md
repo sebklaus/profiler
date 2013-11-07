@@ -1,5 +1,5 @@
 # Profiler
-A PHP 5.3 profiler for [Laravel 4](http://www.laravel.com).  
+A PHP 5.3 profiler for [Laravel 4.0.x and 4.1.x](http://www.laravel.com).  
 Backend based on sorora/omni, frontend based on loic-sharma/profiler. Some features inspired by papajoker/profiler, some features by juy/profiler with additions by myself.
 
 ## Continued
@@ -10,7 +10,7 @@ It includes Pull Requests [#34](https://github.com/juy/profiler/pull/34) &amp; [
 
 ## Features
 
-- Laravel Environment info
+- Laravel Environment info, compatible with 4.0.x and 4.1.x
 - Total memory usage
 - Current controller/action info
 - Routes
