@@ -10,7 +10,7 @@
 	<?php $routes = Route::getRoutes(); ?>
 	@foreach($routes as $name => $route)
 		{{-- Check for Laravel Version --}}
-		@if (stripos($app::VERSION, '4.1') !== FALSE)
+		@if (stripos($app::VERSION, '4.1.')) !== FALSE
 			@if ( Route::current()->getName() == $name)
 		<tr class="highlight">
 			@else
@@ -22,7 +22,7 @@
 			<td>{{ $route->getActionName() ?: 'Closure' }}</td>
 			<td>{{ implode('|', array_keys($route->beforeFilters())) }}</td>
 			<td>{{ implode('|', array_keys($route->afterFilters())) }}</td>
-		@elseif (stripos($app::VERSION, '4.0') !== FALSE)
+		@elseif (stripos($app::VERSION, '4.0.')) !== FALSE
 			@if ( Route::current()->getName() == $name)
 		<tr class="highlight">
 			@else
