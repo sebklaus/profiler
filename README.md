@@ -48,16 +48,16 @@ In order to be able to change the default settings of Profiler, publish the conf
 To change the default settings, edit `app/config/packages/sebklaus/profiler/config.php`.
 
 ### Profiler
-Set this option to `FALSE` to deactivate Profiler or `TRUE` to activate it.	 
-The default `NULL` uses the `debug` setting of `app/config/app.php` (or the appropriate environment `app.php`) to activate/ deactivate.
+Set this option to `false` to deactivate Profiler or `true` to activate it.	 
+The default `null` uses the `debug` setting of `app/config/app.php` (or the appropriate environment `app.php`) to activate/ deactivate.
 
 	// config.php
-	'profiler' => NULL,
+	'profiler' => null,
 
-To be able to enable/ disable Profiler via URL (add **/_profiler** to the end of any URL (eg. *http://localhost/folder/_profiler*)), set the `urlToggle` option to `TRUE`:
+To be able to enable/ disable Profiler via URL (add **/_profiler** to the end of any URL (eg. *http://localhost/folder/_profiler*)), set the `urlToggle` option to `true`:
 
 	// config.php
-	'urlToggle' => FALSE,
+	'urlToggle' => false,
 
 You will be redirected back to the page you started the request from (eg. *http://localhost/folder*).
 
@@ -67,7 +67,7 @@ You will be redirected back to the page you started the request from (eg. *http:
 	// config.php
 	'urlTogglePassword' => \Hash::make((string) mt_rand(0, microtime(true))),
 
-If `profiler` is `NULL` or `FALSE` **and** `urlToggle` is `TRUE` **and** your app is running in the `production` environment, you will be asked to enter the password that has been set for `urlTogglePassword` in order to enable Profiler.  
+If `profiler` is `null` or `false` **and** `urlToggle` is `true` **and** your app is running in the `production` environment, you will be asked to enter the password that has been set for `urlTogglePassword` in order to enable Profiler.  
 Upon successful password verification, Profiler will stay enabled for the duration of the session.
 
 Change `(string) mt_rand(0, microtime(true))` to your preferred password to enable Profiler.
