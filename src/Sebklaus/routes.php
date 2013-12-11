@@ -1,6 +1,6 @@
 <?php
 
-// Use 'before' filter to make sure all previously configured routes are still executed
+// Use 'before' filter to make sure all configured application routes are executed
 // Register new wildcard route and check if it contains '_profiler'
 \App::before(function()
 {
@@ -16,8 +16,8 @@
                     // Data to send to view
                     $data = array(
                         'assetPath' =>  __DIR__.'/../../public/',
-                        'path' => $path,
-                        'origin' => $origin,
+                        'path' =>       $path,
+                        'origin' =>     $origin,
                     );
                     // Show Password view
                     return \View::make('profiler::profiler.password', $data);
@@ -41,9 +41,9 @@
                     $origin = str_ireplace('_profiler', '', $path);
                     // Check if a '_profiler' session key exists and reverse its value
                     $state = \Session::get('_profiler') ? false : true;
-                    // Check, if submitted passwaord matches config password
+                    // Check, if submitted password matches set 'urlTogglePassword' password
                     if (\Hash::check(\Input::get('password'), \Config::get('profiler::urlTogglePassword'))) {
-                        // Apply new state to profiler config
+                        // Apply new state to profiler config, if password checks out
                         \Session::set('_profiler', $state);
                     }
                     // Redirect back to origin

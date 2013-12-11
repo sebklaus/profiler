@@ -34,7 +34,7 @@ class Profiler
     public function setViewData($data)
     {
         foreach($data as $key => $value) {
-            if (! is_object($value)) {
+            if (!is_object($value)) {
                 $this->addKeyToData($key, $value);
             } elseif (method_exists($value, 'toArray')) {
                 $this->addKeyToData($key, $value->toArray());
@@ -129,15 +129,14 @@ class Profiler
                                         } else {
                                             $controller = "N/A";
                                         }
-                                        return $controller; 
                                     } elseif (strpos($app::VERSION, '4.0') !== false) {
                                         if (\Route::currentRouteAction() != "") {
                                             $controller = \Route::currentRouteAction();
                                         } else {
                                             $controller = "N/A";
                                         }
-                                        return $controller;
                                     }
+                                    return $controller;
                                 },
             'routes' =>         function () {
                                     return count(\Route::getRoutes());
@@ -190,7 +189,7 @@ class Profiler
      *
      * @return Array
      */
-    private function getStorageLogs($max=24)
+    private function getStorageLogs($max = 24)
     {
         $file = "";
         $log = array();
@@ -208,7 +207,7 @@ class Profiler
             //'debug' =>    'DEBUG'
         );
         // path to webserver logfile for current day
-        $log_file = app_path().'/storage/logs/log-'.php_sapi_name().'-'.date('Y-m-d').'.txt';
+        $log_file = app_path() . '/storage/logs/log-' . php_sapi_name() . '-' . date('Y-m-d') . '.txt';
         if ( file_exists($log_file)) {
             // get logfile
             $file = \File::get($log_file);
@@ -222,14 +221,14 @@ class Profiler
             }
             // loop through all found lines
             foreach ($headings as $h) {
-                for ($i=0; $i < count($h); $i++) {
+                for ($i = 0; $i < count($h); $i++) {
                     /**
                      * Compare all found lines to specified log levels and store in $log array,
                      * containing error level, error description and stack trace, if match
                      */
                     foreach ($log_levels as $ll) {
                         if (strpos(strtolower($h[$i]), strtolower('log.' . $ll))) {
-                            $log[$i+1] = array('level' => $ll,
+                            $log[$i + 1] = array('level' => $ll,
                                                'header' => $h[$i],
                                                'stack' => $log_data[$i+1]
                                               );
@@ -286,9 +285,9 @@ class Profiler
     {
         $measures = array('B', 'KB', 'MB', 'GB');
         for($i = 0; $bytes >= 1024; $i++) {
-            $bytes = $bytes/1024;
+            $bytes = $bytes / 1024;
         }
-        return number_format($bytes,($i ? 2 : 0),'.', ',').$measures[$i];
+        return number_format($bytes, ($i ? 2 : 0), '.', ',') . $measures[$i];
     }
 
     /**
