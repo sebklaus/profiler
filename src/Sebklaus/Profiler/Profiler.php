@@ -120,9 +120,9 @@ class Profiler
             'memory' =>         function () {
                                     return Profiler::getMemoryUsage();
                                 },
-            // Check for Laravel Version
             'controller' =>     function () {
                                     global $app;
+                                    // Check Laravel Version and use appropriate API method
                                     if (strpos($app::VERSION, '4.1') !== false) {
                                         if (\Route::current()->getActionName() != "") {
                                             $controller = \Route::current()->getActionName();
@@ -228,10 +228,11 @@ class Profiler
                      */
                     foreach ($log_levels as $ll) {
                         if (strpos(strtolower($h[$i]), strtolower('log.' . $ll))) {
-                            $log[$i + 1] = array('level' => $ll,
-                                               'header' => $h[$i],
-                                               'stack' => $log_data[$i+1]
-                                              );
+                            $log[$i + 1] = array(
+                                'level' => $ll,
+                                'header' => $h[$i],
+                                'stack' => $log_data[$i+1]
+                            );
                         }
                     }
                 }
