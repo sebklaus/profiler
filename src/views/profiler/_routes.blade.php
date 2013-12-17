@@ -11,14 +11,14 @@
 	@foreach($routes as $name => $route)
 		{{-- Check for Laravel Version --}}
 		@if (stripos($app::VERSION, '4.1') !== FALSE)
-			@if ( Route::current()->getName() == $name)
+			@if ( Route::current()->getName() == $route->getName())
 		<tr class="highlight">
 			@else
 		<tr>
 			@endif
 			<td>[{{ array_get($route->methods(), 0) }}]</td>
 			<td>{{ $route->uri() }}</td>
-			<td>{{ $name }}</td>
+			<td>{{ $routeName = $route->getName() != "" ? $route->getName() : "[no name]" }}</td>
 			<td>{{ $route->getActionName() ?: 'Closure' }}</td>
 			<td>{{ implode('|', array_keys($route->beforeFilters())) }}</td>
 			<td>{{ implode('|', array_keys($route->afterFilters())) }}</td>
