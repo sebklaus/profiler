@@ -8,7 +8,13 @@ Backend based on sorora/omni, frontend based on loic-sharma/profiler. Some featu
 This is a continuation of [juy/profiler](https://github.com/juy/profiler).  
 It includes Pull Requests [#34](https://github.com/juy/profiler/pull/34) &amp; [#6](https://github.com/juy/profiler/pull/6).
 
+## Different themes
+
+### Dark
 [![](http://i.imm.io/19tLC.png)](http://i.imm.io/19tLC.png "Click for big picture")
+
+### Light
+[![](http://i.imgur.com/KIeUBtS.png)](http://i.imgur.com/KIeUBtS.png "Click for big picture")
 
 ## Features
 
@@ -28,6 +34,7 @@ It includes Pull Requests [#34](https://github.com/juy/profiler/pull/34) &amp; [
 - Laravel auth variables (if used)
 - Sentry auth variables (if used)
 - Enabling/ Disabling via URL (add **/_profiler** to the end of any URL (eg. *http://localhost/folder/_profiler*))
+- Two different themes; dark and light.
 
 ## Installation
 To add Profiler to your Laravel application, add the below line to your `composer.json` file, in `"require": { … }`:
