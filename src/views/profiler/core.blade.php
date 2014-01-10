@@ -1,5 +1,6 @@
 <style>
 	{{ file_get_contents($assetPath.'css/profiler.min.css') }}
+	{{ file_get_contents($assetPath.'css/themes/profiler.' . Config::get('profiler::theme') . '.min.css') }}
 	@if(!empty($sql_log))
 		{{ file_get_contents($assetPath.'css/prettify.min.css') }}
 	@endif

@@ -11,6 +11,9 @@ return array(
 	// Change below urlTogglePassword from *(string) mt_rand(0, microtime(true))* to your prefered password for improved security in production environments.
 	'urlTogglePassword' => \Hash::make((string) mt_rand(0, microtime(true))),
 
+	// Either dark or light theme
+	'theme' => 'light',
+
 	// Profiler can hide certain footer elements and be annoying. This makes it minimized by default. Set TRUE to enable.
 	'minimized' => FALSE,
 
@@ -31,6 +34,5 @@ return array(
 		'auth'=>		array('label'=>'AUTH'),
 		'auth-sentry'=> array('label'=>'AUTH')
 	),
-	'doc' => 'http://www.laravel.com/docs/',
 	
 );

@@ -1,0 +1,24 @@
+.anbu {
+	background-color:#fff !important;
+}
+
+.anbu-tabs a:hover {
+	background-color:#eee !important;
+	color:#000 !important;
+}
+
+.anbu-table th {
+	background-color:#eee !important;
+	color:#000 !important;
+}
+
+.anbu-tabs a.anbu-active-tab {
+	color:#000 !important;
+	background-color:#eee !important;
+}
+
+span.anbu-count {
+	background-color:#e8e8e8 !important;
+	color:#333 !important;
+	text-shadow:0 0 4px #ccc !important;
+}
