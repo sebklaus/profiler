@@ -12,7 +12,7 @@ return array(
 	'urlTogglePassword' => \Hash::make((string) mt_rand(0, microtime(true))),
 
 	// Either dark or light theme
-	'theme' => 'light',
+	'theme' => 'dark',
 
 	// Profiler can hide certain footer elements and be annoying. This makes it minimized by default. Set TRUE to enable.
 	'minimized' => FALSE,
