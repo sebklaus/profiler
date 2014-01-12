@@ -34,5 +34,6 @@ return array(
 		'auth'=>		array('label'=>'AUTH'),
 		'auth-sentry'=> array('label'=>'AUTH')
 	),
+	'doc' => 'http://www.laravel.com/docs/',
 	
 );
