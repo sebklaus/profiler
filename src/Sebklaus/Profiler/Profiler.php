@@ -94,7 +94,7 @@ class Profiler {
 			// Check if SQL connection can be established
 			try
 			{
-				$data['sql_log'] = array_reverse(\DB::getQueryLog());
+				$data['sql_log'] = \DB::getQueryLog();
 			}
 			// Catch exception and return empty array
 			catch (\PDOException $exception)
