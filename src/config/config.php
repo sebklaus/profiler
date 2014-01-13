@@ -13,6 +13,9 @@ return array(
 
 	// Profiler can hide certain footer elements and be annoying. This makes it minimized by default. Set TRUE to enable.
 	'minimized' => FALSE,
+	
+	// Can use a local copy of jQuery
+	'jquery_url' => '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
 
 	// Buttons: order /disable buttons
 	'btns' => array(
