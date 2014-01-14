@@ -1,5 +1,6 @@
 <style>
 	{{ file_get_contents($assetPath.'css/profiler.min.css') }}
+	{{ file_get_contents($assetPath.'css/themes/profiler.' . Config::get('profiler::theme') . '.min.css') }}
 	@if(!empty($sql_log))
 		{{ file_get_contents($assetPath.'css/prettify.min.css') }}
 	@endif
@@ -58,13 +59,11 @@
 			</div>
 			@endif
 
-			@if (Auth::check())
+			@if (class_exists('Auth') && Auth::check())
 				<div class="anbu-tab-pane anbu-table anbu-auth">
 					@include('profiler::profiler._auth')
 				</div>
-			@endif
-
-			@if (class_exists('Cartalyst\Sentry\SentryServiceProvider') && Sentry::check())
+			@elseif (class_exists('Sentry') && Sentry::check())
 				<div class="anbu-tab-pane anbu-table anbu-auth-sentry">
 					@include('profiler::profiler._auth_sentry')
 				</div>

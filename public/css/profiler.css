@@ -6,7 +6,6 @@
 .anbu {
 	font-family:Helvetica, "Helvetica Neue", Arial, sans-serif !important;
 	font-size:14px !important;
-	background-color:#222 !important;
 	position:fixed !important;
 	bottom:0 !important;
 	right:0 !important;
@@ -74,16 +73,6 @@
 	padding: 0.85em 1.2em 0.85em 1.2em !important;
 }
 
-.anbu-tabs a:hover {
-	background-color:#333 !important;
-	color:#fff !important;
-}
-
-.anbu-tabs a.anbu-active-tab {
-	color:#fff !important;
-	background-color:#333 !important;
-}
-
 .anbu a:focus {
 	outline:none !important;
 }
@@ -148,8 +137,6 @@
 }
 
 .anbu-table th {
-	background-color:#555 !important;
-	color:#fff !important;
 	text-transform:uppercase !important;
 }
 
@@ -182,10 +169,8 @@
 span.anbu-count {
 	text-transform: none !important;
 	margin-left:0.5em !important;
-	background-color:#555 !important;
 	display:inline-block !important;
 	padding:0.1em 0.5em 0.2em 0.5em !important;
-	color:#eee !important;
 	text-shadow:0 0 4px #000 !important;
 	-webkit-border-radius: 1px;
 	-moz-border-radius: 1px;
@@ -193,7 +178,6 @@ span.anbu-count {
 	-moz-background-clip: padding;
 	-webkit-background-clip: padding-box;
 	background-clip: padding-box;
-
 }
 
 .anbu-empty {
@@ -231,3 +215,6 @@ span.anbu-count {
 	}
 }
 
+.hide-background {
+	background-image: none;
+}
