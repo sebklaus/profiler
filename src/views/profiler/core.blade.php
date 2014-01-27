@@ -136,7 +136,7 @@
 	</ul>
 </div>
 
-<script type="text/javascript">window.jQuery || document.write('<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"><\/script>')</script>
+<script type="text/javascript">window.jQuery || document.write('<script type="text/javascript" src="{{ Config::get("profiler::jquery_url") }}"><\/script>')</script>
 <script><?php echo file_get_contents($assetPath.'js/profiler.min.js'); ?></script>
 
 @if(!empty($sql_log))
