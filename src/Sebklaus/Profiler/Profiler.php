@@ -1,18 +1,25 @@
 <?php namespace Sebklaus\Profiler;
 
 use Sebklaus\Profiler\Loggers\Time;
+use Illuminate\Foundation\Application;
 
 class Profiler {
 
 	protected $view_data = array();
 	protected $logs = array();
+	protected $storageLogs = array();
+	protected $laravelConfig = array();
 	protected $includedFiles = array();
 
+	protected $laravelVersion;
 	public $time;
 
-	public function __construct(Time $time)
+	public function __construct(Time $time, Application $app)
 	{
+		global $app;
 		$this->time = $time;
+		$this->app = $app;
+		$this->laravelVersion = $app::VERSION;
 	}
 
 	/**
@@ -90,28 +97,22 @@ class Profiler {
 				'includedFiles' =>	get_included_files(),
 				'counts' =>			$this->getCounts(),
 				'assetPath' =>		__DIR__.'/../../../public/',
+				'sql_log' => $this->getDbLog(),
 			);
-			// Check if SQL connection can be established
-			try
-			{
-				$data['sql_log'] = \DB::getQueryLog();
-			}
-			// Catch exception and return empty array
-			catch (\PDOException $exception)
-			{
-				$data['sql_log'] = array();
-			}
+			
 			// Check if btns.storage config option is set
 			if (\Config::get('profiler::btns.storage'))
 			{
 				// get last 24 webserver log entries
-				$data['storageLogs'] = $this->getStorageLogs(24);
+				$this->storageLogs = $this->getStorageLogs(24);
+				$data['storageLogs'] = $this->storageLogs;
 			}
 			// Check if btns.config config option is set
 			if (\Config::get('profiler::btns.config'))
 			{
 				// get all Laravel config options and store in array
-				$data['config'] = array_dot(\Config::getItems());
+				$this->laravelConfig = array_dot(\Config::getItems());
+				$data['config'] = $this->laravelConfig;;
 			}
 
 			return \View::make('profiler::profiler.core', $data);
@@ -125,34 +126,47 @@ class Profiler {
 	 */
 	private function getCounts()
 	{
-		return array(
-			'environment' =>	function(){ return \App::environment(); },
-			'memory' =>			function(){ return Profiler::getMemoryUsage(); },
-			// Check for Laravel Version
-			'controller' =>		function()
-								{
-									global $app;
-									if (strpos($app::VERSION, '4.1') !== FALSE)
-									{
-										return $controller = \Route::current()->getActionName() != "" ? \Route::current()->getActionName() : "N/A"; 
-									}
-									elseif (strpos($app::VERSION, '4.0') !== FALSE)
-									{
-										return $controller = \Route::currentRouteAction() != "" ? \Route::currentRouteAction() : "N/A";
-									}
-								},
-			'routes' =>			function(){ return count(\Route::getRoutes()); },
-			'log' =>			function($app_logs){ return count($app_logs); },
-			'sql' =>			function($sql_log){ return count($sql_log); },
-			'checkpoints' =>	function($times){ return round($times['total'], 3); },
-			'file' =>			function($includedFiles){ return count($includedFiles); },
-			'view' =>			function($view_data){ return count($view_data); },
-			'session' =>		function(){ return count(\Session::all()); },
-			'storage' =>		function($storageLogs){ return count($storageLogs); },
-			'config' =>			function($config){ return count($config); },
-			'auth' =>			function() { return \Auth::user()->email ? \Auth::user()->email : 'User'; },
-			'auth-sentry' =>	function() { return \Sentry::getUser()->email ? \Sentry::getUser()->email : 'User'; },
+		// Get the environment name
+		$environment = $this->app->environment();
+
+		// Determine the current controller name
+		if ($this->isLaravelVersion('4.2,4.1'))
+		{
+			$controllerName = $this->app['router']->current()->getActionName();
+		}
+		elseif ($this->isLaravelVersion('4.0'))
+		{
+			$controllerName = $this->app['router']->currentRouteAction();
+		}
+
+		// Get the times
+		$times = $this->time->getTimes();
+
+		$counts = array(
+			'environment' => $this->app->environment(),
+			'memory'      => $this->getMemoryUsage(),
+			'controller'  => $controllerName,
+			'routes'      => count($this->app['router']->getRoutes()),
+			'log'         => count($this->logs),
+			'sql'         => count($this->getDbLog()),
+			'checkpoints' => round($times['total'], 3),
+			'file'        => count(get_included_files()),
+			'view'        => count($this->getViewData()),
+			'session'     => count($this->app['session']->all()),
+			'storage'     => count($this->storageLogs),
+			'config'      => count($this->laravelConfig),
 		);
+
+		if (isset($this->app['sentry']))
+		{
+			$counts['auth-sentry'] = ($authedUser = $this->app['sentry']->getUser()) ? $authedUser->email : 'User';
+		}
+		else
+		{
+			$counts['auth'] = ($authedUser = $this->app['auth']->user()) ? $authedUser->email : 'User';
+		}
+
+		return $counts;
 	}
 	
 	/**
@@ -217,6 +231,23 @@ class Profiler {
 		return $log;
 	}
 	
+	/**
+	 * Get database logs
+	 * @return array
+	 */
+	public function getDbLog()
+	{
+		// Check if SQL connection can be established
+		try
+		{
+			return $this->app['db']->getQueryLog();
+		}
+		// Catch exception and return empty array
+		catch (\PDOException $exception)
+		{
+			return array();
+		}
+	}
 
 	/**
 	 * Cleans an entire array (escapes HTML)
@@ -292,5 +323,24 @@ class Profiler {
 	public function end($key)
 	{
 		$this->time->end($key);
+	}
+
+	/**
+	 * Determine if the Laravel version start's with the given version number
+	 * @param  string  $version
+	 * @return boolean
+	 */
+	public function isLaravelVersion($version)
+	{
+		$versions = explode(',', $version);
+		foreach ($versions as $version)
+		{
+			if (stripos($this->laravelVersion, $version) !== false)
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

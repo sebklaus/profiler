@@ -80,49 +80,7 @@
 		$btns = Config::get('profiler::btns');
 		foreach ($btns as $key => $btn)
 		{
-			$count = '';
-			if (($key == 'auth') && (!Auth::check()))
-			{
-				continue;
-			}
-			if (($key == 'auth-sentry') && !(class_exists('Cartalyst\Sentry\SentryServiceProvider') && Sentry::check()))
-			{
-				continue;
-			}
-
-			try
-			{
-				switch ($key)
-				{
-					case 'log':
-						$count = $counts[$key]($app_logs);
-						break;
-					case 'sql':
-						$count = $counts[$key]($sql_log);
-						break;
-					case 'checkpoints':
-						$count= $counts[$key]($times);
-						break;
-					case 'file':
-						$count = $counts[$key]($includedFiles);
-						break;
-					case 'view':
-						$count = $counts[$key]($view_data);
-						break;
-					case 'storage':
-						$count = $counts[$key]($storageLogs);
-						break;
-					case 'config':
-						$count = $counts[$key]($config);
-						break;
-					default:
-						$count = $counts[$key]();
-				}
-			}
-			catch (Exception $e)
-			{
-				$count = '';
-			}
+			$count = isset($counts[$key]) ? $counts[$key] : '';
 			echo '<li><a data-anbu-tab="anbu-' . $key . '" class="anbu-tab" href="#" title="' . ((isset($btn['title'])) ? $btn['title'] : $btn['label']) . '">' . $btn['label'] . '<span class="anbu-count">' . $count . '</span></a>' . '</li>';
 		}
 	?>
