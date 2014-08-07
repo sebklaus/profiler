@@ -82,41 +82,38 @@ class Profiler {
 	 */
 	public function outputData()
 	{
-		// Check if profiler config file is present
-		if (\Config::get('profiler::profiler'))
+		$this->time->totalTime();
+
+		// Sort the view data alphabetically
+		ksort($this->view_data);
+
+		// Check if btns.storage config option is set
+		if ($this->app['config']->get('profiler::btns.storage'))
 		{
-			// Sort the view data alphabetically
-			ksort($this->view_data);
-
-			$this->time->totalTime();
-
-			$data = array(
-				'times' => 			$this->time->getTimes(),
-				'view_data' =>		$this->view_data,
-				'app_logs' =>		$this->logs,
-				'includedFiles' =>	get_included_files(),
-				'counts' =>			$this->getCounts(),
-				'assetPath' =>		__DIR__.'/../../../public/',
-				'sql_log' => $this->getDbLog(),
-			);
-			
-			// Check if btns.storage config option is set
-			if (\Config::get('profiler::btns.storage'))
-			{
-				// get last 24 webserver log entries
-				$this->storageLogs = $this->getStorageLogs(24);
-				$data['storageLogs'] = $this->storageLogs;
-			}
-			// Check if btns.config config option is set
-			if (\Config::get('profiler::btns.config'))
-			{
-				// get all Laravel config options and store in array
-				$this->laravelConfig = array_dot(\Config::getItems());
-				$data['config'] = $this->laravelConfig;;
-			}
-
-			return \View::make('profiler::profiler.core', $data);
+			// get last 24 webserver log entries
+			$this->storageLogs = $this->getStorageLogs(24);
 		}
+
+		// Check if btns.config config option is set
+		if ($this->app['config']->get('profiler::btns.config'))
+		{
+			// get all Laravel config options and store in array
+			$this->laravelConfig = array_dot($this->app['config']->getItems());
+		}
+
+		$data = array(
+			'times'         => $this->time->getTimes(),
+			'view_data'     => $this->view_data,
+			'app_logs'      => $this->logs,
+			'storageLogs'   => $this->storageLogs,
+			'config'        => $this->laravelConfig,
+			'includedFiles' => get_included_files(),
+			'counts'        => $this->getCounts(),
+			'assetPath'     => __DIR__.'/../../../public/',
+			'sql_log'       => $this->getDbLog(),
+		);
+
+		return $this->app['view']->make('profiler::profiler.core', $data);
 	}
 
 	/**
@@ -275,7 +272,7 @@ class Profiler {
 	 */
 	public static function getMemoryUsage()
 	{
-		return Profiler::formatBytes(memory_get_usage());
+		return self::formatBytes(memory_get_usage());
 	}
 
 	/**
