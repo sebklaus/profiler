@@ -1,12 +1,8 @@
 # Profiler
-A PHP 5.3 profiler for [Laravel 4.0.x and 4.1.x](http://www.laravel.com).  
+A PHP 5.3 profiler for [Laravel 4.0, 4.1, 4.2](http://www.laravel.com).  
 Backend based on sorora/omni, frontend based on loic-sharma/profiler. Some features inspired by papajoker/profiler, some features by juy/profiler with additions by myself.
 
 [![Latest Stable Version](https://poser.pugx.org/sebklaus/profiler/version.png)](https://packagist.org/packages/sebklaus/profiler) [![Total Downloads](https://poser.pugx.org/sebklaus/profiler/d/total.png)](https://packagist.org/packages/sebklaus/profiler)
-
-## Continued
-This is a continuation of [juy/profiler](https://github.com/juy/profiler).  
-It includes Pull Requests [#34](https://github.com/juy/profiler/pull/34) &amp; [#6](https://github.com/juy/profiler/pull/6).
 
 ## Different themes
 

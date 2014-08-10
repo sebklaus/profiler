@@ -51,7 +51,8 @@ class ProfilerServiceProvider extends ServiceProvider {
 		$this->app['profiler'] = $this->app->share(function($app)
 		{
 			return new \Sebklaus\Profiler\Profiler(
-				new \Sebklaus\Profiler\Loggers\Time
+				new \Sebklaus\Profiler\Loggers\Time,
+				$app
 			);
 		});
 	}

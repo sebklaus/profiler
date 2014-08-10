@@ -5,19 +5,17 @@
 	</tr>
 	<tr>
 		<td>Current route</td>
-{{-- Check for Laravel Version --}}
-@if (strpos($app::VERSION, '4.1') !== FALSE)
+@if ($app['profiler']->isLaravelVersion('4.2,4.1'))
 		<td>{{ Route::current()->getName() }}</td>
-@elseif (strpos($app::VERSION, '4.0') !== FALSE)
+@elseif ($app['profiler']->isLaravelVersion('4.0'))
 		<td>{{ Route::currentRouteName() }}</td>
 @endif
 	</tr>
 	<tr>
 		<td>Current controller action</td>
-{{-- Check for Laravel Version --}}
-@if (strpos($app::VERSION, '4.1') !== FALSE)
+@if ($app['profiler']->isLaravelVersion('4.2,4.1'))
 		<td>{{ Route::current()->getActionName() }}</td>
-@elseif (strpos($app::VERSION, '4.0') !== FALSE)
+@elseif ($app['profiler']->isLaravelVersion('4.0'))
 		<td>{{ Route::currentRouteAction() }}</td>
 @endif
 	</tr>

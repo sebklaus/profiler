@@ -7,10 +7,13 @@
 		<th>Before</th>
 		<th>After</th>
 	</tr>
-	<?php $routes = Route::getRoutes(); ?>
+	<?php
+		$routes = Route::getRoutes();
+		$profiler = $app['profiler'];
+		?>
 	@foreach($routes as $name => $route)
 		{{-- Check for Laravel Version --}}
-		@if (stripos($app::VERSION, '4.1') !== FALSE)
+		@if ($profiler->isLaravelVersion('4.2,4.1'))
 			@if ( Route::current()->getName() == $route->getName())
 		<tr class="highlight">
 			@else
@@ -22,7 +25,7 @@
 			<td>{{ $route->getActionName() ?: 'Closure' }}</td>
 			<td>{{ implode('|', array_keys($route->beforeFilters())) }}</td>
 			<td>{{ implode('|', array_keys($route->afterFilters())) }}</td>
-		@elseif (stripos($app::VERSION, '4.0') !== FALSE)
+		@elseif ($profiler->isLaravelVersion('4.0'))
 			@if ( Route::currentRouteName() == $name)
 		<tr class="highlight">
 			@else
